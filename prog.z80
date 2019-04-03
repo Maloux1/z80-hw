@@ -1,0 +1,18 @@
+bcall:macro xxxx
+	rst 28h
+	dw xxxx
+endm
+_clrlcdfull: equ $4540
+_puts: equ $450A
+currow: equ $844B
+org $9D93
+db $BB,$6D
+		bcall _clrlcdfull
+		ld de,$0103
+		ld (currow),de
+		ld hl,texte
+		bcall _puts
+		ret
+texte:
+db "HELLO, WORLD ! ",0
+end
